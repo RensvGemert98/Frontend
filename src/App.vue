@@ -40,7 +40,7 @@ export default {
   name: "App",
   data() {
     return {
-      appTitle: 'FreeMarket',
+      appTitle: 'BlueCool',
       menuItems: [
         { title: 'Sign Up', path: '/signup' },
         { title: 'Sign In', path: '/signin' }
