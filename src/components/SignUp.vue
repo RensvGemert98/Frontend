@@ -8,27 +8,19 @@
           <form>
             <v-layout column>
               <v-flex>
-                <v-text-field
-                  name="email"
-                  label="Email"
-                  id="email"
-                  type="email"
+                <v-text-field class="lol"
+                  name="Username"
+                  label="Username"
+                  id="Username"
+                  type="Username"
                   required></v-text-field>
               </v-flex>
               <v-flex>
                 <v-text-field
-                  name="password"
+                  name="Password"
                   label="Password"
-                  id="password"
-                  type="password"
-                  required></v-text-field>
-              </v-flex>
-              <v-flex>
-                <v-text-field
-                  name="confirmPassword"
-                  label="Confirm Password"
-                  id="confirmPassword"
-                  type="password"
+                  id="Password"
+                  type="Password"
                   required
                   ></v-text-field>
               </v-flex>
@@ -45,4 +37,25 @@
   <script>
   export default {};
   </script>
+
+  <style scoped>
+.v-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.v-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.v-text-field .v-field {
+  margin:20px;
+}
+
+</style>
   

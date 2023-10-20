@@ -9,16 +9,16 @@
             <v-layout column>
               <v-flex>
                 <v-text-field
-                  name="email"
-                  label="Email"
-                  id="email"
-                  type="email"
+                  name="username"
+                  label="username"
+                  id="username"
+                  type="username"
                   required></v-text-field>
               </v-flex>
               <v-flex>
                 <v-text-field
                   name="password"
-                  label="Password"
+                  label="password"
                   id="password"
                   type="password"
                   required></v-text-field>
@@ -34,6 +34,28 @@
   </template>
   
   <script>
-  export default {};
+  export default {
+
+  };
   </script>
   
+  <style scoped>
+  .v-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .v-layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .v-text-field .v-field {
+    margin:20px;
+  }
+  
+  </style>
