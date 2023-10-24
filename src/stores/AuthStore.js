@@ -5,40 +5,39 @@ export const useAuthStore = defineStore('authStore', {
         isAdmin: false,
         isLoggedIn: false,
         loading: false,
-        JwtToken: []
+        JwtToken: [],
+        accounts: [],
     }),
     actions: {
-        async signIn(UserName, Password) {
+        async getAccounts() {
+            this.isLoading = true
+            const res = await fetch('http://localhost:8001/api/Account')
+            const data = await res.json()
+            this.accounts = data
+            this.isLoading = false
+        },
+        async signIn(UserName, password) {
             this.isLoading = true;
 
-            const loginData = {
-                UserName,
-                Password,
-            };
+            const res = await fetch('http://localhost:8001/api/Account/signin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ UserName, password }),
+            });
 
-            try {
-                const res = await fetch('http://localhost:8001/api/Account/signin', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(loginData),
-                });
-
-                if (res.ok) {
-                    const token = await res.json();
-                    this.JwtToken = token;
-                    this.isLoggedIn = true;
-                } else {
-                    // Handle login errors here
-                    console.error('Login failed');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-            } finally {
-                this.isLoading = false;
+            if (res.ok) {
+                const token = await res.json();
+                this.JwtToken = token;
+                this.isLoggedIn = true;
+            } else {
+                // Handle login errors here
+                console.error('Login failed');
             }
-        },
+            this.isLoading = false;
+        }
+
     },
 
 })
