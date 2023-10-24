@@ -6,6 +6,8 @@
           {{ appTitle }}
         </router-link>
       </v-toolbar-title>
+      
+      <!-- Alignment right -->
       <v-spacer></v-spacer>
 
       <!-- If not logged in show signup and sign in -->
@@ -42,7 +44,6 @@ export default {
     return {
       appTitle: 'BlueCool',
       menuItems: [
-        { title: 'Sign Up', path: '/signup' },
         { title: 'Sign In', path: '/signin' }
       ],
       LoggedInmenuItems: [

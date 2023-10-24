@@ -1,61 +1,38 @@
 <template>
-    <v-container fluid>
-      <v-layout row wrap>
-        <v-flex xs12 class="text-xs-center" mt-5>
-          <h1>Sign In</h1>
-        </v-flex>
-        <v-flex xs12 sm6 offset-sm3 mt-3>
-          <form>
-            <v-layout column>
-              <v-flex>
-                <v-text-field
-                  name="username"
-                  label="username"
-                  id="username"
-                  type="username"
-                  required></v-text-field>
-              </v-flex>
-              <v-flex>
-                <v-text-field
-                  name="password"
-                  label="password"
-                  id="password"
-                  type="password"
-                  required></v-text-field>
-              </v-flex>
-              <v-flex class="text-xs-center" mt-5>
-                <v-btn color="primary" type="submit">Sign In</v-btn>
-              </v-flex>
-            </v-layout>
-          </form>
-        </v-flex>
-      </v-layout>
-    </v-container>
-  </template>
-  
-  <script>
-  export default {
+  <v-content>
+    <v-card width="500" class="mx-auto mt-9">
+      <v-card-title>Sign In</v-card-title>
+      <v-card-text>
+        <v-text-field v-model="UserName" label="Username" prepend-icon="mdi-account-circle" />
+        <v-text-field v-model="Password" label="Password" :type="showPassword ? 'text' : 'password'"
+          prepend-icon="mdi-lock" :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+          @click:append="showPassword = !showPassword" />
+      </v-card-text>
 
-  };
-  </script>
+      <v-divider></v-divider>
+      <v-card-actions>
+        <v-btn color="success">Register</v-btn>
+        <v-btn @click="authStore.signIn(UserName, Password)" color="info">Login</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-content>
+</template>
   
-  <style scoped>
-  .v-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
-  .v-layout {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-  }
-  
-  .v-text-field .v-field {
-    margin:20px;
-  }
-  
-  </style>
+<script>
+import { useAuthStore } from '../stores/AuthStore';
+
+export default {
+  setup() {
+    const authStore = useAuthStore()
+
+    return {
+      authStore
+    }
+  },
+  data() {
+    return {
+      showPassword: false,
+    };
+  },
+};
+</script>
