@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="login">
+    <form @submit.prevent="login()">
     <v-card width="500" class="mx-auto mt-9">
       
       <v-card-title>Sign In</v-card-title>
@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     async login() {
-      await authStore.signIn(this.UserName, this.Password);
+      await this.authStore.signIn(this.UserName, this.Password);
     }
   },
 }

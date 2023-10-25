@@ -5,7 +5,7 @@ export const useAuthStore = defineStore('authStore', {
         isAdmin: false,
         isLoggedIn: false,
         loading: false,
-        JwtToken: [],
+        tokenJWT: [],
         accounts: [],
     }),
     actions: {
@@ -29,7 +29,7 @@ export const useAuthStore = defineStore('authStore', {
 
             if (res.ok) {
                 const token = await res.json();
-                this.JwtToken = token;
+                this.tokenJWT = token;
                 this.isLoggedIn = true;
             } else {
                 // Handle login errors here
