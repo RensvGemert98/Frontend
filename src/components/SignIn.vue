@@ -38,6 +38,10 @@ export default {
   methods: {
     async login() {
       await this.authStore.signIn(this.UserName, this.Password);
+
+      if(this.authStore.isLoggedIn){
+        this.$router.push('/');
+      } 
     }
   },
 }

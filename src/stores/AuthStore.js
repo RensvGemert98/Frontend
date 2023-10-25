@@ -5,6 +5,7 @@ export const useAuthStore = defineStore('authStore', {
         isAdmin: false,
         isLoggedIn: false,
         loading: false,
+        JWT: [],
         accounts: [],
     }),
     actions: {
@@ -33,7 +34,7 @@ export const useAuthStore = defineStore('authStore', {
 
             if (res.ok) {
                 const token = await res.json();
-                console.log(token)
+                this.JWT = token;
                 localStorage.setItem('tokenJWT', token.jwtToken);
                 this.isLoggedIn = true;
             } else {
@@ -41,8 +42,7 @@ export const useAuthStore = defineStore('authStore', {
                 console.error('Login failed');
             }
             this.isLoading = false;
-        }
-
+        },
     },
 
 })
