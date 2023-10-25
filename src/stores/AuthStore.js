@@ -2,10 +2,9 @@ import { defineStore } from 'pinia'
 
 export const useAuthStore = defineStore('authStore', {
     state: () => ({
-        isAdmin: false,
         isLoggedIn: false,
         loading: false,
-        JWT: [],
+        JWT: "",
         accounts: [],
     }),
     actions: {
@@ -18,9 +17,9 @@ export const useAuthStore = defineStore('authStore', {
         },
         async signOut() {
             this.isLoggedIn = false,
-            this.isAdmin = false,
-            this.accounts = [],
-            localStorage.clear();
+                this.accounts = [],
+                localStorage.removeItem('tokenJWT');
+
         },
         async signIn(UserName, password) {
             this.isLoading = true;
@@ -34,9 +33,10 @@ export const useAuthStore = defineStore('authStore', {
 
             if (res.ok) {
                 const token = await res.json();
-                this.JWT = token;
+                this.JWT = token.jwtToken;
                 localStorage.setItem('tokenJWT', token.jwtToken);
                 this.isLoggedIn = true;
+                console.log("Logged in: " + token.userName)
             } else {
                 // Handle login errors here
                 console.error('Login failed');
