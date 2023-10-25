@@ -5,7 +5,6 @@ export const useAuthStore = defineStore('authStore', {
         isAdmin: false,
         isLoggedIn: false,
         loading: false,
-        tokenJWT: [],
         accounts: [],
     }),
     actions: {
@@ -16,9 +15,14 @@ export const useAuthStore = defineStore('authStore', {
             this.accounts = data
             this.isLoading = false
         },
+        async signOut() {
+            this.isLoggedIn = false,
+            this.isAdmin = false,
+            this.accounts = [],
+            localStorage.clear();
+        },
         async signIn(UserName, password) {
             this.isLoading = true;
-
             const res = await fetch('http://localhost:8001/api/Account/signin', {
                 method: 'POST',
                 headers: {
@@ -29,7 +33,8 @@ export const useAuthStore = defineStore('authStore', {
 
             if (res.ok) {
                 const token = await res.json();
-                this.tokenJWT = token;
+                console.log(token)
+                localStorage.setItem('tokenJWT', token.jwtToken);
                 this.isLoggedIn = true;
             } else {
                 // Handle login errors here

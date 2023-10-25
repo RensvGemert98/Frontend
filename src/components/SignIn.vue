@@ -12,10 +12,10 @@
 
       <v-divider></v-divider>
       <v-card-actions>
-        <v-btn color="success">Register</v-btn>
         <v-btn type="submit" color="info">Login</v-btn>
       </v-card-actions>
     </v-card>
+
     <v-btn @click="authStore.getAccounts()">CLICK FOR ACCOUNTS</v-btn>
   </form>
 </template>

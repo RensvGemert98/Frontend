@@ -11,7 +11,13 @@ export const useCustomerStore = defineStore('customerStore', {
     actions: {
         async getCustomers(){
             this.isLoading = true
-            const res = await fetch('http://localhost:8001/api/Customer')
+            const token = localStorage.getItem('tokenJWT')
+            const res = await fetch('http://localhost:8001/api/Customer', {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            })
+            
             const data = await res.json()
             this.customers = data
             this.isLoading = false
