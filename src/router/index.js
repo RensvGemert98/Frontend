@@ -5,6 +5,7 @@ import ProductsOverview from '../components/ProductsOverview.vue';
 import OrdersOverview from '../components/OrdersOverview.vue';
 import SignIn from '../components/SignIn.vue';
 import Signout from '../components/Signout.vue';
+import SignUp from '../components/SignUp.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +39,11 @@ const router = createRouter({
       path: '/signout',
       name: 'signout',
       component: Signout
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: SignUp
     },
   ]
 })

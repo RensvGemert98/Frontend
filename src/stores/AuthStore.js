@@ -21,6 +21,22 @@ export const useAuthStore = defineStore('authStore', {
                 localStorage.removeItem('tokenJWT');
 
         },
+        async signUp(UserName, Password, Role) {
+            const res = await fetch('http://localhost:8001/api/Account', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({UserName, Password, Role}),
+            });
+
+            if (res.ok) {
+                console.log("Succesfully registered")
+            } else {
+                console.error('lol noob');
+            }
+
+        },
         async signIn(UserName, password) {
             this.isLoading = true;
             const res = await fetch('http://localhost:8001/api/Account/signin', {

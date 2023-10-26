@@ -6,7 +6,7 @@
           {{ appTitle }}
         </router-link>
       </v-toolbar-title>
-      
+
       <!-- Alignment right -->
       <v-spacer></v-spacer>
 
@@ -44,7 +44,8 @@ export default {
     return {
       appTitle: 'BlueCool',
       menuItems: [
-        { title: 'Sign In', path: '/signin' }
+        { title: 'Sign In', path: '/signin' },
+        { title: 'Sign Up', path: '/signup' }
       ],
       LoggedInmenuItems: [
         { title: 'Products', path: '/product' },

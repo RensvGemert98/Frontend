@@ -13,11 +13,14 @@
       <v-divider></v-divider>
       <v-card-actions>
         <v-btn type="submit" color="info">Login</v-btn>
+        
       </v-card-actions>
     </v-card>
 
-    <v-btn @click="authStore.getAccounts()">CLICK FOR ACCOUNTS</v-btn>
   </form>
+  <v-card width="150" class="mx-auto mt-9">
+  <v-btn @click="authStore.getAccounts()" type="submit" color="success">GET ACCOUNTS</v-btn>
+  </v-card>
 </template>
   
 <script>
