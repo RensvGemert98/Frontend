@@ -1,8 +1,8 @@
 <template>
   <v-app>
-    <v-toolbar app>
+    <v-toolbar app style="background-color: #0090E3">
       <v-toolbar-title>
-        <router-link to="/" style="text-decoration: none; color: black; font-weight: 800;">
+        <router-link to="/" style="text-decoration: none; color: white; font-weight: 800;">
           {{ appTitle }}
         </router-link>
       </v-toolbar-title>
@@ -13,7 +13,7 @@
       <!-- If not logged in show signup and sign in -->
       <div v-if="!authStore.isLoggedIn">
         <v-toolbar-items class="hidden-xs-only">
-          <v-btn flat v-for="item in menuItems" :key="item.title" :to="item.path">
+          <v-btn flat v-for="item in menuItems" :key="item.title" :to="item.path" style="color: white;">
             {{ item.title }}
           </v-btn>
         </v-toolbar-items>
