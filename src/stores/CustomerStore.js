@@ -1,33 +1,29 @@
 import { defineStore } from 'pinia'
+import router from '../router/index.js'
 
 export const useCustomerStore = defineStore('customerStore', {
     state: () => ({
         customers: [],
         customer: {},
-        loading: false
     }),
     getters: {
     },
     actions: {
         async getCustomers() {
-            this.isLoading = true
-            const token = localStorage.getItem('tokenJWT')
-            try {
-                const res = await fetch('http://localhost:8001/api/Customer', {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                    },
-                })
 
-                const data = await res.json()
-                this.customers = data
+            if (localStorage.getItem('role') != 'Admin') {
+                router.push('/unauthorized')
+                return null
             }
 
-            catch {
-                console.log("Unauthorized")
-            }
+            const res = await fetch('http://localhost:8001/api/Customer', {
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('tokenJWT'),
+                },
+            })
 
-            this.isLoading = false
+            const data = await res.json()
+            this.customers = data
         }
     }
 })

@@ -18,10 +18,10 @@
           </v-btn>
         </v-toolbar-items>
       </div>
-      <!-- if logged in show links without auth-->
+      <!-- if logged in show links without auth-->  
       <div v-else>
         <v-toolbar-items class="hidden-xs-only">
-          <v-btn flat v-for="item in LoggedInmenuItems" :key="item.title" :to="item.path">
+          <v-btn flat v-for="item in LoggedInmenuItems" :key="item.title" :to="item.path" style="color: white;">
             {{ item.title }}
           </v-btn>
         </v-toolbar-items>

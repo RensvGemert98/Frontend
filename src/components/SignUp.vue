@@ -37,6 +37,8 @@ export default {
     methods: {
         async signUp() {
             await this.authStore.signUp(this.UserName, this.Password, this.Role);
+
+            this.$router.push('/signin');
         }
     },
 }

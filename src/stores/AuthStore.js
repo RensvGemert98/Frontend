@@ -6,6 +6,7 @@ export const useAuthStore = defineStore('authStore', {
         loading: false,
         JWT: "",
         accounts: [],
+        UserRole: "",
     }),
     actions: {
         async getAccounts() {
@@ -19,7 +20,8 @@ export const useAuthStore = defineStore('authStore', {
             this.isLoggedIn = false,
                 this.accounts = [],
                 localStorage.removeItem('tokenJWT');
-
+            this.UserRole = ""
+            localStorage.removeItem('role');
         },
         async signUp(UserName, Password, Role) {
             const res = await fetch('http://localhost:8001/api/Account', {
@@ -27,13 +29,11 @@ export const useAuthStore = defineStore('authStore', {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({UserName, Password, Role}),
+                body: JSON.stringify({ UserName, Password, Role }),
             });
 
             if (res.ok) {
                 console.log("Succesfully registered")
-            } else {
-                console.error('lol noob');
             }
 
         },
@@ -48,17 +48,27 @@ export const useAuthStore = defineStore('authStore', {
             });
 
             if (res.ok) {
-                const token = await res.json();
-                this.JWT = token.jwtToken;
-                localStorage.setItem('tokenJWT', token.jwtToken);
+                const response = await res.json();
+                this.JWT = response.jwtToken;
+                localStorage.setItem('tokenJWT', response.jwtToken);
                 this.isLoggedIn = true;
-                console.log("Logged in: " + token.userName)
+                console.log(response);
+                this.decodeJWT(this.JWT)
             } else {
                 // Handle login errors here
                 console.error('Login failed');
             }
             this.isLoading = false;
         },
+        decodeJWT(token) {
+            let jwtData = token.split('.')[1]
+            let decodedJwtJsonData = window.atob(jwtData)
+            let decodedJwtData = JSON.parse(decodedJwtJsonData)
+            let Role = decodedJwtData.Role
+            console.log('decodedJwtJsonData: ' + decodedJwtJsonData);
+            this.UserRole = Role
+            localStorage.setItem('role', this.UserRole)
+        }
     },
 
 })

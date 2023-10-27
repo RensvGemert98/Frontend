@@ -6,6 +6,7 @@ import OrdersOverview from '../components/OrdersOverview.vue';
 import SignIn from '../components/SignIn.vue';
 import Signout from '../components/Signout.vue';
 import SignUp from '../components/SignUp.vue';
+import Unauthorized from '../components/Unauthorized.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,6 +45,11 @@ const router = createRouter({
       path: '/signup',
       name: 'signup',
       component: SignUp
+    },
+    {
+      path: '/unauthorized',
+      name: 'unauthorized',
+      component: Unauthorized
     },
   ]
 })
