@@ -11,7 +11,7 @@ export const useProductStore = defineStore('productStore', {
     actions: {
         async getProducts(){
             this.isLoading = true
-            const res = await fetch('http://localhost:8001/api/Product')
+            const res = await fetch('https://localhost:8001/api/Product')
             const data = await res.json()
             this.products = data
             this.isLoading = false
