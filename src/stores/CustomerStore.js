@@ -16,7 +16,7 @@ export const useCustomerStore = defineStore('customerStore', {
                 return null
             }
 
-            const res = await fetch('http://localhost:8001/api/Customer', {
+            const res = await fetch('https://localhost:8001/api/Customer', {
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('tokenJWT'),
                 },
