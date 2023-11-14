@@ -20,4 +20,4 @@ jobs:
         with:
           args: >
               -Dsonar.organization=rensvgemert98
-              -Dsonar.projectKey=rensvgemert98
+              -Dsonar.projectKey=frontend
