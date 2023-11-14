@@ -19,5 +19,5 @@ jobs:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-              -Dsonar.organization=rensvgemert98
+              -Dsonar.organization=RensvGemert98
               -Dsonar.projectKey=frontend
