@@ -7,6 +7,7 @@ export const useAuthStore = defineStore('authStore', {
         JWT: "",
         accounts: [],
         UserRole: "",
+        UserId: null,
     }),
     actions: {
         async getAccounts() {
@@ -18,10 +19,13 @@ export const useAuthStore = defineStore('authStore', {
         },
         async signOut() {
             this.isLoggedIn = false,
-                this.accounts = [],
-                localStorage.removeItem('tokenJWT');
+            this.accounts = [],
+            localStorage.removeItem('tokenJWT');
             this.UserRole = ""
             localStorage.removeItem('role');
+            this.UserId = 0
+            localStorage.removeItem('UserId');
+            this.JWT = ""
         },
         async signUp(UserName, Password, Role) {
             const res = await fetch('https://localhost:8001/api/Account', {
@@ -35,7 +39,6 @@ export const useAuthStore = defineStore('authStore', {
             if (res.ok) {
                 console.log("Succesfully registered")
             }
-
         },
         async signIn(UserName, password) {
             this.isLoading = true;
@@ -50,7 +53,9 @@ export const useAuthStore = defineStore('authStore', {
             if (res.ok) {
                 const response = await res.json();
                 this.JWT = response.jwtToken;
+                this.UserId = response.userId;
                 localStorage.setItem('tokenJWT', response.jwtToken);
+                localStorage.setItem('UserId', response.userId);
                 this.isLoggedIn = true;
                 console.log(response);
                 this.decodeJWT(this.JWT)

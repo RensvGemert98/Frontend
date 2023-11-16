@@ -18,7 +18,7 @@
           </v-btn>
         </v-toolbar-items>
       </div>
-      <!-- if logged in show links without auth-->  
+      <!-- if logged in show links without auth-->
       <div v-else>
         <v-toolbar-items class="hidden-xs-only">
           <v-btn flat v-for="item in LoggedInmenuItems" :key="item.title" :to="item.path" style="color: white;">
@@ -49,7 +49,7 @@ export default {
       ],
       LoggedInmenuItems: [
         { title: 'Products', path: '/product' },
-        { title: 'Customers', path: '/customers' },
+        { title: 'Account', path: '/customer/id' },
         { title: 'Orders', path: '/order' },
         { title: 'Sign Out', path: '/signout' }
       ]
@@ -58,13 +58,10 @@ export default {
 
   setup() {
     const authStore = useAuthStore()
-
     return {
-      authStore
+      authStore,
     }
-
   }
-
 };
 </script>
 <style></style>
