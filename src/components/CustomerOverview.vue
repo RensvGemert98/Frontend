@@ -42,9 +42,6 @@
           <th class="text-left">
             Phone
           </th>
-          <th class="text-left">
-
-          </th>
         </tr>
       </thead>
       <tbody>

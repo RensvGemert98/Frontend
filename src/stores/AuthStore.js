@@ -6,8 +6,10 @@ export const useAuthStore = defineStore('authStore', {
         loading: false,
         JWT: "",
         accounts: [],
+        account: {},
         UserRole: "",
         UserId: null,
+        IsDeleted: false
     }),
     actions: {
         async getAccounts() {
@@ -17,6 +19,35 @@ export const useAuthStore = defineStore('authStore', {
             this.accounts = data
             this.isLoading = false
         },
+
+        async getAccountById(id) {
+            const res = await fetch('https://localhost:8001/api/Account/' + id)
+            if (res.ok) {
+                const data = await res.json()
+                this.account = data
+            }
+        },
+
+        async deleteAccount(id) {
+            const res = await fetch('https://localhost:8001/api/Account/' + id, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            if (res.ok) {
+                this.isDeleted = true
+                this.isLoggedIn = false,
+                this.accounts = [],
+                localStorage.removeItem('tokenJWT');
+                this.UserRole = ""
+                localStorage.removeItem('role');
+                this.UserId = 0
+                localStorage.removeItem('UserId');
+                this.JWT = ""
+            }
+        },
+
         async signOut() {
             this.isLoggedIn = false,
             this.accounts = [],
@@ -25,8 +56,10 @@ export const useAuthStore = defineStore('authStore', {
             localStorage.removeItem('role');
             this.UserId = 0
             localStorage.removeItem('UserId');
-            this.JWT = ""
+            this.JWT = "",
+            IsDeleted = false
         },
+
         async signUp(UserName, Password, Role) {
             const res = await fetch('https://localhost:8001/api/Account', {
                 method: 'POST',
@@ -40,6 +73,7 @@ export const useAuthStore = defineStore('authStore', {
                 console.log("Succesfully registered")
             }
         },
+
         async signIn(UserName, password) {
             this.isLoading = true;
             const res = await fetch('https://localhost:8001/api/Account/signin', {
@@ -65,6 +99,7 @@ export const useAuthStore = defineStore('authStore', {
             }
             this.isLoading = false;
         },
+
         decodeJWT(token) {
             let jwtData = token.split('.')[1]
             let decodedJwtJsonData = window.atob(jwtData)

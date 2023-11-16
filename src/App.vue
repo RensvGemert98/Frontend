@@ -48,8 +48,9 @@ export default {
         { title: 'Sign Up', path: '/signup' }
       ],
       LoggedInmenuItems: [
+        { title: 'My Account', path: '/account/:id' },
         { title: 'Products', path: '/product' },
-        { title: 'Account', path: '/customer/id' },
+        { title: 'Customer Details', path: '/customer/:id' },
         { title: 'Orders', path: '/order' },
         { title: 'Sign Out', path: '/signout' }
       ]
