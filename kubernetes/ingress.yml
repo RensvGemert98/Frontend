@@ -4,7 +4,7 @@ metadata:
   name: frontend-ingress
 spec:
   rules:
-  - host: bluecoolfrontend.com
+  - host: bluecool.nl
     http:
       paths:
       - pathType: Prefix
