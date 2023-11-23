@@ -14,14 +14,14 @@ export const useAuthStore = defineStore('authStore', {
     actions: {
         async getAccounts() {
             this.isLoading = true
-            const res = await fetch('https://localhost:8001/api/Account')
+            const res = await fetch('http://localhost:8001/api/Account')
             const data = await res.json()
             this.accounts = data
             this.isLoading = false
         },
 
         async getAccountById(id) {
-            const res = await fetch('https://localhost:8001/api/Account/' + id)
+            const res = await fetch('http://localhost:8001/api/Account/' + id)
             if (res.ok) {
                 const data = await res.json()
                 this.account = data
@@ -29,7 +29,7 @@ export const useAuthStore = defineStore('authStore', {
         },
 
         async deleteAccount(id) {
-            const res = await fetch('https://localhost:8001/api/Account/' + id, {
+            const res = await fetch('http://localhost:8001/api/Account/' + id, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ export const useAuthStore = defineStore('authStore', {
         },
 
         async signUp(UserName, Password, Role) {
-            const res = await fetch('https://localhost:8001/api/Account', {
+            const res = await fetch('http://localhost:8001/api/Account', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ export const useAuthStore = defineStore('authStore', {
 
         async signIn(UserName, password) {
             this.isLoading = true;
-            const res = await fetch('https://localhost:8001/api/Account/signin', {
+            const res = await fetch('http://localhost:8001/api/Account/signin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

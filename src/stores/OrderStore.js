@@ -11,7 +11,7 @@ export const useOrderStore = defineStore('orderStore', {
     actions: {
         async getOrders(){
             this.isLoading = true
-            const res = await fetch('https://localhost:8001/api/Order')
+            const res = await fetch('http://localhost:8001/api/Order')
             const data = await res.json()
             this.orders = data
             this.isLoading = false

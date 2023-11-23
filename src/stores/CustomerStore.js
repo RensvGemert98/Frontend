@@ -17,7 +17,7 @@ export const useCustomerStore = defineStore('customerStore', {
                 return null
             }
 
-            const res = await fetch('https://localhost:8001/api/Customer', {
+            const res = await fetch('http://localhost:8001/api/Customer', {
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('tokenJWT'),
                 },
@@ -28,7 +28,7 @@ export const useCustomerStore = defineStore('customerStore', {
         },
 
         async getCustomerById(id) {
-            const res = await fetch('https://localhost:8001/api/Customer/' + id, {
+            const res = await fetch('http://localhost:8001/api/Customer/' + id, {
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('tokenJWT'),
                 },
@@ -47,7 +47,7 @@ export const useCustomerStore = defineStore('customerStore', {
         },
 
         async createCustomerAccount(customerEmail, customerName, address, zipcode, city, phone) {
-            const res = await fetch('https://localhost:8001/api/Customer', {
+            const res = await fetch('http://localhost:8001/api/Customer', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
