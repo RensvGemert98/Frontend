@@ -1,0 +1,75 @@
+name: Frontend Build & Test & Publish
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm install
+    - run: npm ci
+    - run: npm run build --if-present
+
+# SNYCK
+  SnyckScan:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@master
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+# SONAR CLOUD
+  SonarCloudScan:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+        with:
+            fetch-depth: 0
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+            GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+              -Dsonar.organization=rensvgemert98
+              -Dsonar.projectKey=RensvGemert98_Frontend
+
+# DOCKER PUSH
+  DockerPush:
+      runs-on: ubuntu-latest
+      needs: 
+        - SnyckScan
+        - SonarCloudScan
+      steps:
+        - name: Check out the repo
+          uses: actions/checkout@v3
+        - name: Login to Docker Hub
+          uses: docker/login-action@v2
+          with:
+            username: ${{ secrets.DOCKERHUB_USERNAME }}
+            password: ${{ secrets.DOCKERHUB_PASSWORD }}
+        - name: Build and push Docker image
+          uses: docker/build-push-action@v4
+          with:
+            context: .
+            push: true
+            tags: rensfhictdocker/frontend:latest
