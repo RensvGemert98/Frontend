@@ -2,7 +2,6 @@
 
 <template>
   <div>
-    <h1>Welcome!</h1>
     <ProductCards />
   </div>
 </template>
