@@ -10,3 +10,4 @@ spec:
       port: 5018
       targetPort: 5018
       name: http
+  type: LoadBalancer
