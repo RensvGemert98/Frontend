@@ -19,7 +19,7 @@
 
   </form>
   <v-card width="150" class="mx-auto mt-9">
-  <v-btn @click="authStore.getAccounts()" type="submit" color="success">GET ACCOUNTS</v-btn>
+  <!-- <v-btn @click="authStore.getAccounts()" type="submit" color="success">GET ACCOUNTS</v-btn> -->
   </v-card>
 </template>
   
